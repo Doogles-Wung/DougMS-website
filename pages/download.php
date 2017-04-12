@@ -86,9 +86,9 @@
 								<p>Rates:</p>
 							</div>
 							<div class="col-xs-6 text-right">
-								<p><a href="?base=main&amp;page=download">62</a></p>
-								<p>256</p><!-- If server is offline it says Offline -->
-								<p>2, 1, 1</p>
+								<p><a href="?base=main&amp;page=download">83</a></p>
+								<p>0</p><!-- If server is offline it says Offline -->
+								<p>?, ?, ?</p>
 							</div>
 						</div>
 					</div>
@@ -102,7 +102,15 @@
 					<div class="panel-body">
 						<div class="row">
 							<div class="media download-block">
-
+								<div class="media-body">
+									<h4 class="media-heading">DougMS Client</h4>
+									Download the dougMS client here!
+								</div>
+								<div class="media-left">
+									<form method="get" action="../files/dougMS.exe">
+										<button class="btn btn-block btn-lg btn-violet" type="submit">Download</button>
+									</form>
+								</div>
 							</div>
 						</div>
 						

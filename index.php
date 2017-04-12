@@ -86,9 +86,9 @@
 								<p>Rates:</p>
 							</div>
 							<div class="col-xs-6 text-right">
-								<p><a href="?base=main&amp;page=download">62</a></p>
-								<p>256</p><!-- If server is offline it says Offline -->
-								<p>2, 1, 1</p>
+								<p><a href="?base=main&amp;page=download">83</a></p>
+								<p>0</p><!-- If server is offline it says Offline -->
+								<p>?, ?, ?</p>
 							</div>
 						</div>
 					</div>
