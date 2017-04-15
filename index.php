@@ -39,13 +39,13 @@
         </div>
         <div class="collapse navbar-collapse" id="navbar-collapse">
             <ul class="nav navbar-nav">
-                <li><a href="?base=main">Home</a></li>
+                <li><a href="index.php">Home</a></li>
                 <li><a href="pages/download.php">Download</a></li>
                 <li><a href="#">Forums</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="javascript:document.getElementById('sporter04').focus()">Login</a></li>
-                <li><a href="?base=main&amp;page=register">Register</a></li>
+                <li><a href="pages/register.php">Register</a></li>
             </ul>
         </div>
     </div>
@@ -159,7 +159,7 @@
 	<footer>
 		<div class="container copyright">
 			<div class="col-lg-12">
-                <p>Copyright © 2015 DougMS. <br>
+                <p>Copyright © 2017 DougMS. <br>
 			</div>
 		</div>
 	</footer>

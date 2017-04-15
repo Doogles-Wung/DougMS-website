@@ -1,3 +1,55 @@
+
+<?PHP
+
+if (isset($_POST['username']) && 
+   isset($_POST['password']) &&
+   isset($_POST['verify_password']) &&
+   isset($_POST['email'])) {
+    
+    $nameErr = "";
+    $emailErr = "";
+    $passwordErr = "";
+    
+    if (!preg_match("/^[a-zA-Z0-9]*$/",$_POST['username'])) {
+        $nameErr = "Only letters and numbers allowed"; 
+    }
+    
+    if (strlen($_POST['username']) === 0) {
+        $nameErr = "User Name must not be empty";
+    }
+    
+    if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+        $emailErr = "Invalid email format"; 
+    }
+    
+    if (strlen($_POST['email']) === 0) {
+        $emailErr = "Email must not be empty";
+    }
+    
+    if ($_POST['password'] !== $_POST['verify_password']) {
+        $passwordErr = "Passwords must be the same";
+    }
+    
+    if (strlen($_POST['password']) === 0) {
+        $passwordErr = "Password must not be empty";
+    }
+    
+    if ($nameErr == "" && $emailErr == "" && $passwordErr == "") {
+        createAccount($_POST['username'], $_POST['password'], $_POST['email']);
+        $registrationSuccess = true;
+    }
+}
+
+function createAccount($username, $password, $email) {
+    
+    $mysqli = new mysqli("127.0.0.1", "root", NULL, "moopledev", "3306");
+
+    $query = $mysqli->prepare('INSERT INTO accounts (name, password, email) VALUES (?, ?, ?)');
+    
+    $query->bind_param("sss", $username, $password, $email);
+    $query->execute();
+}
+?>
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
@@ -97,35 +149,42 @@
 			<div class="col-lg-9">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h3 class="panel-title">Download</h3>
+						<h3 class="panel-title">Register</h3>
 					</div>
 					<div class="panel-body">
-						<div class="row">
-							<div class="media download-block">
-								<div class="media-body">
-									<h4 class="media-heading">DougMS Client</h4>
-									Download the dougMS client here!
-								</div>
-								<div class="media-left">
-									<form method="get" action="../files/dougMS.exe">
-										<button class="btn btn-block btn-lg btn-violet" type="submit">Download</button>
-									</form>
-								</div>
+                        <?php if (isset ($registrationSuccess) && $registrationSuccess === true) { ?>
+                            <h3 class="alert alert-success">Registration successful!</h3>
+                        <?php } else { ?>
+						<form id="registerform" method="post" action="register.php">
+							<div class="form-group">
+								<input id="username" class="form-control" placeholder="Username" type="text" name="username">
 							</div>
-						</div>
-                        
-                        <div class="row">
-							<div class="media download-block">
-								<div class="media-body">
-									<h4 class="media-heading">Maplestory v83</h4>
-									Download the MapleStory v83 here!
-								</div>
-								<div class="media-left">
-                                    <button class="btn btn-block btn-lg btn-violet" onclick="window.open('http://www.mediafire.com/file/fl8af9c75bpeflt/MSSetupv83.exe')">Download</button>
-								</div>
+                            <?php if (isset($nameErr)) {
+                            ?>
+                                <p class="alert alert-danger">
+                            <?php echo $nameErr; } ?></p>
+							<div class="form-group">
+								<input id="password" class="form-control" placeholder="Password" type="password" name="password">
 							</div>
-						</div>
-						
+                            <div class="form-group">
+                                <input id="confirm-password" class="form-control" placeholder="Confirm Password" type="password" name="verify_password">
+                            </div>
+                            <?php if (isset($passwordErr)) {
+                            ?>
+                                <p class="alert alert-danger">
+                            <?php echo $passwordErr; } ?></p>
+                            <div class="form-group">
+                                <input id="email" class="form-control" placeholder="Email Address" type="text" name="email">
+                            </div>
+                            <?php if (isset($emailErr)) {
+                            ?>
+                                <p class="alert alert-danger">
+                            <?php echo $emailErr; } ?></p>
+							<div class="form-group">
+                                <button class="btn btn-block btn-violet" type="submit">Register</button>
+                            </div>
+						</form>
+                        <?php } ?>
 					</div>
 				</div>
 			</div>
