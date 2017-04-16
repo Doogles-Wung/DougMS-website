@@ -1,5 +1,7 @@
 
 <?PHP
+session_start();
+
 
 if (isset($_POST['username']) && 
    isset($_POST['password']) &&
@@ -48,6 +50,10 @@ function createAccount($username, $password, $email) {
     
     $query->bind_param("sss", $username, $password, $email);
     $query->execute();
+
+    $query->close();
+
+    $mysqli->close();
 }
 ?>
 <!DOCTYPE html>
@@ -96,8 +102,12 @@ function createAccount($username, $password, $email) {
                 <li><a href="#">Forums</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="javascript:document.getElementById('sporter04').focus()">Login</a></li>
-                <li><a href="register.php">Register</a></li>
+                <?php if (!isset($_SESSION['username'])) { ?>
+                    <li><a href="login.php">Login</a></li>
+                    <li><a href="register.php">Register</a></li>
+                    <?php } else { ?>
+                    <li><a href="logout.php">Logout</a></li>
+                <?php } ?>
             </ul>
         </div>
     </div>
@@ -108,24 +118,40 @@ function createAccount($username, $password, $email) {
 		<div class="row">
 			<div class="col-lg-3">
 				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3 class="panel-title">Control Panel</h3>
-					</div>
-					<div class="panel-body">
-						<form id="loginform">
-							<div class="form-group">
-								<input id="sporter04" class="form-control" placeholder="Username" type="text">
-							</div>
-							<div class="form-group">
-								<input id="sporter05" class="form-control" placeholder="Password" type="password">
-							</div>
-							<div class="form-group">
+					<?php if (!isset($_SESSION['username'])) { ?>
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Control Panel</h3>
+                    </div>
+                    <div class="panel-body">
+                        <form id="loginform" action="login.php" method="POST">
+                            <div class="form-group">
+                                <input id="sporter04" class="form-control" placeholder="Username" type="text" name="username">
+                            </div>
+                            <div class="form-group">
+                                <input  id="sporter05" class="form-control" placeholder="Password" type="password" name="password">
+                            </div>
+                            <div class="form-group">
                                 <button class="btn btn-block btn-violet" type="submit">Login</button>
                             </div>
-						</form>
+                        </form>
                         <div id="message"></div>
-					</div>
-				</div>
+                    </div>
+                </div>
+                <?php } else { ?>
+                <div class="panel-heading">
+                        <h3 class="panel-title">Account Information</h3>
+                    </div>
+                    <div class="panel-body">
+                        Welcome <?php echo $_SESSION['username'] ?>!
+                        <form id="loginform" action="logout.php" method="POST">
+                            <div class="form-group">
+                                <button class="btn btn-block btn-violet" type="submit">Logout</button>
+                            </div>
+                        </form>
+                        <div id="message"></div>
+                    </div>
+                </div>
+                <?php }?>
 				<div id="servinfo" class="panel panel-default">
 					<div class="panel-heading">
 						<h3 class="panel-title">Server Info</h3>
@@ -159,7 +185,7 @@ function createAccount($username, $password, $email) {
 							<div class="form-group">
 								<input id="username" class="form-control" placeholder="Username" type="text" name="username">
 							</div>
-                            <?php if (isset($nameErr)) {
+                            <?php if (isset($nameErr) && $nameErr !== '') {
                             ?>
                                 <p class="alert alert-danger">
                             <?php echo $nameErr; } ?></p>
@@ -169,14 +195,14 @@ function createAccount($username, $password, $email) {
                             <div class="form-group">
                                 <input id="confirm-password" class="form-control" placeholder="Confirm Password" type="password" name="verify_password">
                             </div>
-                            <?php if (isset($passwordErr)) {
+                            <?php if (isset($passwordErr) && $passwordErr !== '') {
                             ?>
                                 <p class="alert alert-danger">
                             <?php echo $passwordErr; } ?></p>
                             <div class="form-group">
                                 <input id="email" class="form-control" placeholder="Email Address" type="text" name="email">
                             </div>
-                            <?php if (isset($emailErr)) {
+                            <?php if (isset($emailErr) && $emailErr !== '') {
                             ?>
                                 <p class="alert alert-danger">
                             <?php echo $emailErr; } ?></p>

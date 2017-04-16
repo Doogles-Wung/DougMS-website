@@ -1,3 +1,6 @@
+<?php 
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
@@ -44,8 +47,12 @@
                 <li><a href="#">Forums</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="javascript:document.getElementById('sporter04').focus()">Login</a></li>
-                <li><a href="pages/register.php">Register</a></li>
+            	<?php if (!isset($_SESSION['username'])) { ?>
+                	<li><a href="pages/login.php">Login</a></li>
+                	<li><a href="pages/register.php">Register</a></li>
+                	<?php } else { ?>
+                	<li><a href="pages/logout.php">Logout</a></li>
+                	<?php } ?>
             </ul>
         </div>
     </div>
@@ -56,24 +63,40 @@
 		<div class="row">
 			<div class="col-lg-3">
 				<div class="panel panel-default">
+					<?php if (!isset($_SESSION['username'])) { ?>
 					<div class="panel-heading">
 						<h3 class="panel-title">Control Panel</h3>
 					</div>
 					<div class="panel-body">
-						<form id="loginform">
+						<form id="loginform" action="pages/login.php" method="POST">
 							<div class="form-group">
-								<input id="sporter04" class="form-control" placeholder="Username" type="text">
+								<input id="sporter04" class="form-control" placeholder="Username" type="text" name="username">
 							</div>
 							<div class="form-group">
-								<input id="sporter05" class="form-control" placeholder="Password" type="password">
+								<input  id="sporter05" class="form-control" placeholder="Password" type="password" name="password">
 							</div>
 							<div class="form-group">
-                                <button class="btn btn-block btn-violet" type="submit">Login</button>
-                            </div>
+						        <button class="btn btn-block btn-violet" type="submit">Login</button>
+						    </div>
 						</form>
                         <div id="message"></div>
 					</div>
 				</div>
+				<?php } else { ?>
+				<div class="panel-heading">
+						<h3 class="panel-title">Account Information</h3>
+					</div>
+					<div class="panel-body">
+						Welcome <?php echo $_SESSION['username'] ?>!
+						<form id="loginform" action="pages/logout.php" method="POST">
+							<div class="form-group">
+					       	 	<button class="btn btn-block btn-violet" type="submit">Logout</button>
+							</div>
+						</form>
+                        <div id="message"></div>
+					</div>
+				</div>
+				<?php }?>
 				<div id="servinfo" class="panel panel-default">
 					<div class="panel-heading">
 						<h3 class="panel-title">Server Info</h3>
