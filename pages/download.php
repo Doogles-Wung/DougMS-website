@@ -109,7 +109,7 @@ session_start();
 								<p>Rates:</p>
 							</div>
 							<div class="col-xs-6 text-right">
-								<p><a href="?base=main&amp;page=download">83</a></p>
+								<p><a href="download">83</a></p>
 								<p>0</p><!-- If server is offline it says Offline -->
 								<p>?, ?, ?</p>
 							</div>
