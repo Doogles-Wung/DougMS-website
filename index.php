@@ -132,45 +132,7 @@ session_start();
 								</div>
 								<div class="media-body">
 									<h4 class="media-heading">Welcome!</h4>
-									Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus. 
-								</div>
-							</div>
-						</div>
-						<div class="row text-center">
-							<div class="col-md-4 col-sm-6 hero-feature">
-								<div class="thumbnail">
-									<img src="http://placehold.it/800x500" alt="">
-									<div class="caption">
-										<h3>Feature Label</h3>
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-										<p>
-											<a href="#" class="btn btn-primary">Buy Now!</a> <a href="#" class="btn btn-default">More Info</a>
-										</p>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-4 col-sm-6 hero-feature">
-								<div class="thumbnail">
-									<img src="http://placehold.it/800x500" alt="">
-									<div class="caption">
-										<h3>Feature Label</h3>
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-										<p>
-											<a href="#" class="btn btn-primary">Buy Now!</a> <a href="#" class="btn btn-default">More Info</a>
-										</p>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-4 col-sm-6 hero-feature">
-								<div class="thumbnail">
-									<img src="http://placehold.it/800x500" alt="">
-									<div class="caption">
-										<h3>Feature Label</h3>
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-										<p>
-											<a href="#" class="btn btn-primary">Buy Now!</a> <a href="#" class="btn btn-default">More Info</a>
-										</p>
-									</div>
+									This game was a side project that I attempted because of the history I have with MapleStory. Please enjoy your stay.
 								</div>
 							</div>
 						</div>
