@@ -37,7 +37,7 @@ if (isset($_POST['username']) &&
     }
     
     if ($nameErr == "" && $emailErr == "" && $passwordErr == "") {
-        createAccount($_POST['username'], sha1($_POST['password']), $_POST['email']);
+        createAccount($_POST['username'], sha1($_POST['password'], false), $_POST['email']);
         $registrationSuccess = true;
     }
 }
