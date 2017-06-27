@@ -37,7 +37,7 @@ if (isset($_POST['username']) &&
     }
     
     if ($nameErr == "" && $emailErr == "" && $passwordErr == "") {
-        createAccount($_POST['username'], sha1($_POST['password'], false), $_POST['email']);
+        createAccount($_POST['username'], $_POST['password'], $_POST['email']);
         $registrationSuccess = true;
     }
 }
@@ -46,7 +46,7 @@ function createAccount($username, $password, $email) {
     
     $mysqli = new mysqli("127.0.0.1", "root", NULL, "moopledev", "3306");
 
-    $query = $mysqli->prepare('INSERT INTO accounts (name, password, email) VALUES (?, ?, ?)');
+    $query = $mysqli->prepare('INSERT INTO accounts (name, password, email) VALUES (?, SHA1(?), ?)');
     
     $query->bind_param("sss", $username, $password, $email);
     $query->execute();
