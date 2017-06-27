@@ -14,7 +14,8 @@ function retreiveAccount($username, $password) {
 
     $query = $mysqli->prepare('SELECT name FROM accounts WHERE name = ? AND password = ? LIMIT 1');
     
-    $query->bind_param("ss", $username, sha1($password));
+    $encryptedPassword = sha1($password);
+    $query->bind_param("ss", $username, $encryptedPassword);
     $query->execute();
 
     $query->store_result();
